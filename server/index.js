@@ -1,23 +1,41 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import cors from 'cors';
-
-import postRoutes from './routes/posts.js'
-
+const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+const PostMessageModel = require("./models/postMessage.js");
 
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+const cors = require("cors");
+
+app.use(express.json());
 app.use(cors());
 
-app.use("/posts", postRoutes);
+mongoose.connect("mongodb+srv://tla2020:Learn2019@cluster0.hnp2e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
-const CONNECTION_URL = "mongodb+srv://tla2020:Learn2019@cluster0.hnp2e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+app.get("/getPosts", async (req, res) => {
+    try {
+        const postMessages = await PostMessageModel.find();
+
+        res.status(200).json(postMessages);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});
+
+app.post("/createPost", async (req, res) => {
+    const post = req.body;
+
+    const newPost = new PostMessageModel(post);
+
+    try {
+        await newPost.save();
+
+        res.status(201).json(newPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+});
+
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-    .catch((error) => console.log(error.message))
-
-// mongoose.set("useFindAndModify", false);
+app.listen(PORT, () => {
+    console.log(`Server running on port: ${PORT}`);
+});
