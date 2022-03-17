@@ -36,11 +36,16 @@ app.post("/posts", async (req, res) => {
 });
 
 app.patch("/posts/:id", async (req, res) => {
-    try {
+    const { id: _id } = req.params;
+    const post = req.body;
 
-    } catch (error) {
-
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).send("No post with that id");
     }
+
+    const updatedPost = await PostMessageModel.findById(_id, post, { new: true });
+
+    res.json(updatedPost);
 });
 
 const PORT = process.env.PORT || 5000;
