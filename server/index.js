@@ -11,7 +11,7 @@ app.use(cors());
 
 mongoose.connect("mongodb+srv://tla2020:Learn2019@cluster0.hnp2e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
-app.get("/getPosts", async (req, res) => {
+app.get("/", async (req, res) => {
     try {
         const postMessages = await PostMessageModel.find();
 
@@ -21,7 +21,7 @@ app.get("/getPosts", async (req, res) => {
     }
 });
 
-app.post("/createPost", async (req, res) => {
+app.post("/", async (req, res) => {
     const post = req.body;
 
     const newPost = new PostMessageModel(post);
@@ -34,6 +34,8 @@ app.post("/createPost", async (req, res) => {
         res.status(409).json({ message: error.message });
     }
 });
+
+app.patch("/")
 
 const PORT = process.env.PORT || 5000;
 
