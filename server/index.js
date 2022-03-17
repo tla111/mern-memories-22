@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+
 const PostMessageModel = require("./models/postMessage.js");
 
 const cors = require("cors");
