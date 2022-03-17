@@ -43,7 +43,7 @@ app.patch("/posts/:id", async (req, res) => {
         return res.status(404).send("No post with that id");
     }
 
-    const updatedPost = await PostMessageModel.findById(_id, post, { new: true });
+    const updatedPost = await PostMessageModel.findByIdAndUpdate(_id, post, { new: true });
 
     res.json(updatedPost);
 });
