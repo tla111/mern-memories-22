@@ -62,6 +62,19 @@ app.delete("/posts/:id", async (req, res) => {
     res.json({ message: "Post deleted successfully" });
 });
 
+app.patch("posts/:id/likePost", async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).send("No post with that id");
+    }
+
+    const post = await PostMessageModel.findById(id);
+    const updatedPost = await PostMessageModel.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
+
+    res.json(updatedPost);
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
