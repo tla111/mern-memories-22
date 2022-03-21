@@ -7,8 +7,7 @@ import Input from './Input';
 const Auth = () => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
-
-    const isSignup = false;
+    const [isSignup, setIsSignup] = useState(false);
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -21,7 +20,8 @@ const Auth = () => {
     };
 
     const switchMode = () => {
-
+        setIsSignup((prevIsSignup) => !prevIsSignup);
+        handleShowPassword(false);
     };
 
     return (
