@@ -54,7 +54,7 @@ const Auth = () => {
                         {isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
                     </Grid>
                     <GoogleLogin
-                        clientId="GOOGLE ID"
+                        clientId="743832394603-f8bp3c6kv0lmak7q03qatkfan4mvhem6.apps.googleusercontent.com"
                         render={(renderProps) => (
                             <Button
                                 className={classes.googleButton}
