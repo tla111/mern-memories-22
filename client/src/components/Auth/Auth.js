@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
+import Icon from './icon';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
 import Input from './Input';
@@ -23,6 +24,14 @@ const Auth = () => {
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup);
         handleShowPassword(false);
+    };
+
+    const googleSuccess = (res) => {
+        console.log(res);
+    };
+
+    const googleFailure = () => {
+        console.log("Google Sign In was unsuccessful. Try Again Later");
     };
 
     return (
@@ -53,12 +62,15 @@ const Auth = () => {
                                 fullWidth
                                 onClick={renderProps.onClick}
                                 disabled={renderProps.disabled}
-                                // startIcon={<Icon />}
+                                startIcon={<Icon />}
                                 variant="contained"
                             >
                                 Google Sign In
                             </Button>
                         )}
+                        onSuccess={googleSuccess}
+                        onFailure={googleFailure}
+                        cookiePolicy="single_host_origin"
                     />
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         {isSignup ? "Sign Up" : "Sign In"}
