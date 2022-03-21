@@ -6,12 +6,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Icon from './icon';
 import useStyles from './styles';
 import Input from './Input';
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch()
+    let navigate = useNavigate();
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -33,7 +35,9 @@ const Auth = () => {
         const token = res?.tokenId;
 
         try {
-            dispatch({ type: "AUTH", data: { result, token } })
+            dispatch({ type: "AUTH", data: { result, token } });
+
+            navigate("/");
         } catch (error) {
             console.log(error);
         }
