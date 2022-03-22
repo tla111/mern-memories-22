@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const PostMessageModel = require("./models/postMessage.js");
+const UserModel = require("./models/user.js");
 
 const cors = require("cors");
 
