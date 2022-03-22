@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 
 const PostMessageModel = require("./models/postMessage.js");
 const UserModel = require("./models/user.js");
+const auth = require("./middleware/auth.js");
 
 const cors = require("cors");
 
@@ -24,7 +25,7 @@ app.get("/posts", async (req, res) => {
     }
 });
 
-app.post("/posts", async (req, res) => {
+app.post("/posts", auth, async (req, res) => {
     const post = req.body;
 
     const newPost = new PostMessageModel(post);
@@ -38,7 +39,7 @@ app.post("/posts", async (req, res) => {
     }
 });
 
-app.patch("/posts/:id", async (req, res) => {
+app.patch("/posts/:id", auth, async (req, res) => {
     const { id: _id } = req.params;
     const post = req.body;
 
@@ -51,7 +52,7 @@ app.patch("/posts/:id", async (req, res) => {
     res.json(updatedPost);
 });
 
-app.delete("/posts/:id", async (req, res) => {
+app.delete("/posts/:id", auth, async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -63,7 +64,7 @@ app.delete("/posts/:id", async (req, res) => {
     res.json({ message: "Post deleted successfully" });
 });
 
-app.patch("/posts/:id/likePost", async (req, res) => {
+app.patch("/posts/:id/likePost", auth, async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
