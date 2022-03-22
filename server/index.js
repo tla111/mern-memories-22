@@ -108,7 +108,7 @@ app.post("/user/signin", async (req, res) => {
     }
 });
 
-app.post("/user/signup", async (req, res) => {
+app.post("/user/signp", async (req, res) => {
     const { email, password, confirmPassword, firstName, lastName } = req.body;
 
     try {
