@@ -74,6 +74,14 @@ app.patch("/posts/:id/likePost", async (req, res) => {
     res.json(updatedPost);
 });
 
+app.post("/user/signin", async (req, res) => {
+
+});
+
+app.post("/user/signup", async (req, res) => {
+
+});
+
 
 const PORT = process.env.PORT || 5000;
 
