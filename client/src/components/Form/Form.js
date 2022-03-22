@@ -68,7 +68,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(",") })}
                 />
                 <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
-                <Button variant="contained" color="black" size="small" onClick={clear} fullWidth>Clear</Button>
+                <Button variant="contained" color="inherit" size="small" onClick={clear} fullWidth>Clear</Button>
             </form>
         </Paper>
     )
