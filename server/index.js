@@ -28,7 +28,7 @@ app.get("/posts", async (req, res) => {
 app.post("/posts", auth, async (req, res) => {
     const post = req.body;
 
-    const newPost = new PostMessageModel(post);
+    const newPost = new PostMessageModel({ ...post, creator: req.userId, createdAt: new Date().toISOString() });
 
     try {
         await newPost.save();
