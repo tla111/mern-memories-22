@@ -9,6 +9,7 @@ import Auth from './components/Auth/Auth';
 
 
 const App = () => {
+    const user = JSON.parse(localStorage.getItem("profile"));
 
     return (
         <BrowserRouter>
@@ -19,7 +20,7 @@ const App = () => {
                     <Route path="/posts" exact element={<Home />} />
                     <Route path="/posts/search" exact element={<Home />} />
                     <Route path="/posts/:id" element={<PostDetails />} />
-                    <Route path="/auth" exact element={<Auth />} />
+                    <Route path="/auth" exact element={!user ? <Auth /> : <Navigate replace to="/posts/" />} />
                 </Routes>
             </Container>
         </BrowserRouter>
