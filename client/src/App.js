@@ -12,7 +12,10 @@ const App = () => (
         <Container maxwidth="xl">
             <Navbar />
             <Routes>
-                <Route path="/" exact element={<Home />} />
+                <Route path="/" exact element={() => <Redirect to="/posts" />} />
+                <Route path="/posts" exact element={<Home />} />
+                <Route path="/posts/search" exact element={<Home />} />
+                <Route path="/posts/:id" element={<PostDetails />} />
                 <Route path="/auth" exact element={<Auth />} />
             </Routes>
         </Container>
