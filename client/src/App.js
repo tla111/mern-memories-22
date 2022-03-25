@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from '@material-ui/core';
-import { BrowserRouter, Routes, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
+
+function Redirect({ to }) {
+    let navigate = useNavigate();
+    useEffect(() => {
+        navigate(to);
+    });
+    return null;
+}
 
 const App = () => (
 
